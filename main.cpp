@@ -16,13 +16,13 @@ int main() {
     string nombreGanadorUltimaPartida = "" ;
     string nombreGanadorHistorico = "" ;
 
-    mostrarCartelEnfrendados() ;  // FN en menu.cpp
+    mostrarCartelEnfrendados() ;
 
     do {
 
-        system("cls") ; // Borra la pantalla antes de mostrar el menu cada vez
+        system("cls") ;
 
-        opcion = seleccionarOpcion() ; // FN en menu.cpp
+        opcion = seleccionarOpcion() ;
 
         if (opcion == 0) {
 
@@ -30,21 +30,19 @@ int main() {
 
             cout << "El juego ha finalizado. Hasta la proxima!" << endl ;
 
-            break ; // Salir del bucle
+            break ;
         }
 
-          ejecutarOpcion(opcion, maximoPuntaje, mayorPuntaje, nombreGanadorUltimaPartida, nombreGanadorHistorico) ; // FN en menu.cpp
+          ejecutarOpcion(opcion, maximoPuntaje, mayorPuntaje, nombreGanadorUltimaPartida, nombreGanadorHistorico) ;
 
-        // Despues de ejecutar una opcion, pregunta si el usuario quiere volver al menu o salir
+          int volverMenu = volver_atras(opcion, maximoPuntaje, mayorPuntaje, nombreGanadorUltimaPartida, nombreGanadorHistorico) ;
 
-          int volverMenu = volver_atras(opcion, maximoPuntaje, mayorPuntaje, nombreGanadorUltimaPartida, nombreGanadorHistorico) ; // FN en volverAtras.cpp
-
-        if (volverMenu == 0) { // El usuario eligio salir
+        if (volverMenu == 0) {
 
             break ;
         }
 
-    } while (true) ; // Bucle indefinidamente hasta que el usuario elija salir
+    } while (true) ;
 
     return 0 ;
 }

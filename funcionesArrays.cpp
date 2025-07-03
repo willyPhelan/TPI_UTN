@@ -4,8 +4,6 @@
 
 using namespace std ;
 
-// Función para mostrar los valores de un array de dados
-
 void mostrarDados(const int dados[], int cantidadDados) {
 
     for (int i = 0; i < cantidadDados; i++) {
@@ -13,22 +11,17 @@ void mostrarDados(const int dados[], int cantidadDados) {
         cout << dados[i] << " " ;
     }}
 
-
-// Función que agrega un valor a un array y retornar la nueva cantidad
-
 int agregarDadoAlArray(int dados[], int cantidadDados, int valor) {
 
-    if (cantidadDados < 12) { //  maxStock de 12 //  crucial para evitar un desbordamiento de búfer (buffer overflow)
+    if (cantidadDados < 12) {
 
         dados[cantidadDados] = valor ;
 
-        return cantidadDados + 1 ; // Retorna la nueva cantidad
+        return cantidadDados + 1 ;
 
     } else {
 
-        // cout << "Advertencia: Stock de dados lleno, no se puede agregar mas." << endl;
-
-        return cantidadDados ; // La cantidad no cambia si no se pudo agregar
+        return cantidadDados ;
     }
 }
 
@@ -45,7 +38,7 @@ int posicionNumeroEnVector(int v[],int tam, int numero){
 
 
 
-void copiarVector(int v[] , int v2[] , int tam){ //copia el vector v en v2
+void copiarVector(int v[] , int v2[] , int tam){
 
     int i ;
 

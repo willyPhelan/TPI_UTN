@@ -43,6 +43,7 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="maximoPuntaje.cpp" />
 		<Unit filename="menu.cpp" />
+		<Unit filename="mostrarEstadoJuego.cpp" />
 		<Unit filename="tirada.cpp" />
 		<Unit filename="volverAtras.cpp" />
 		<Extensions />

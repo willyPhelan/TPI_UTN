@@ -3,10 +3,6 @@
 
 using namespace std ;
 
-
-// Nueva función genérica para la tirada inicial y determinar quién empieza
-
-
 string determinarPrimerJugador(string jugador1, string jugador2) {
 
     int dado1, dado2 ;
@@ -17,7 +13,7 @@ string determinarPrimerJugador(string jugador1, string jugador2) {
 
     system("pause") ;
 
-    dado1 = dado6caras() ; // fn en dado6caras.cpp
+    dado1 = dado6caras() ;
 
     cout << endl << "Salio el dado numero: " << dado1 << endl << endl ;
 
@@ -25,7 +21,7 @@ string determinarPrimerJugador(string jugador1, string jugador2) {
 
     system("pause") ;
 
-    dado2 = dado6caras() ; // // fn en dado6caras.cpp
+    dado2 = dado6caras() ;
 
     cout << endl << "Salio el dado numero: " << dado2 << endl << endl ;
 
@@ -37,7 +33,7 @@ string determinarPrimerJugador(string jugador1, string jugador2) {
 
         system("pause") ;
 
-        dado1 = dado6caras() ; // fn en dado6caras.cpp
+        dado1 = dado6caras() ;
 
         cout << jugador1 << " te salio el numero: " << dado1 << endl << endl ;
 
@@ -45,7 +41,7 @@ string determinarPrimerJugador(string jugador1, string jugador2) {
 
         system("pause") ;
 
-        dado2 = dado6caras() ; // fn en dado6caras.cpp
+        dado2 = dado6caras() ;
 
         cout << jugador2 << " te salio el numero: " << dado2 << endl << endl ;
     }
@@ -72,41 +68,33 @@ string determinarPrimerJugador(string jugador1, string jugador2) {
 }
 
 
-// NUEVA FUNCIÓN PARA PROCESAR LA SELECCIÓN DE DADOS, PUNTUACIÓN Y TRANSFERENCIA
-// Retorna true si el juego continúa, false si hay una victoria automática
-
-
 bool procesarTurnoJugador(int stockActual[], int &cantActual, int stockOponente[], int &cantOponente,
                           int sumaObjetivo, int &puntosJugador, int stockMaximo,
                           string nombreJugadorActual, string nombreOponente) {
 
     int sumaSeleccionada = 0 ;
 
-    int dadosElegidosValores[stockMaximo] ; // Array C-style para almacenar los dados seleccionados temporalmente
+    int dadosElegidosValores[stockMaximo] ;
 
     int dadosElegidosCantidad = 0 ;
 
-    bool tiradaExitosa = false ; // Esta bandera ahora se usará INTERNAMENTE para decidir el resultado
+    bool tiradaExitosa = false ;
 
-    // Pedir al jugador que seleccione los dados
+    int tempStock[stockMaximo] ;
 
-    int tempStock[stockMaximo] ; // Copia temporal del stock para validar y seleccionar sin modificar el original
-
-    copiarVector(stockActual, tempStock, cantActual) ; // fn en funcionesArray.cpp
+    copiarVector(stockActual, tempStock, cantActual) ;
 
     int tempCant = cantActual ;
 
     cout << "Tus dados: " << endl ;
 
-    mostrarDados(stockActual, cantActual) ; // fn en funcionesArray.cpp
+    mostrarDados(stockActual, cantActual) ;
 
     cout << endl ;
 
     cout << endl << "Ingresa los valores de los dados que deseas usar para sumar al objetivo (0 para terminar):" << endl << endl ;
 
     int dadoElegido ;
-
-    // El cambio principal es que la condición del 'while' ahora permite un control más granular con 'break'
 
     while (true) {
 
@@ -116,35 +104,28 @@ bool procesarTurnoJugador(int stockActual[], int &cantActual, int stockOponente[
 
         cin >> dadoElegido ;
 
-        // Comprobar si la entrada fue un 0 (terminar turno)
-
         if (dadoElegido == 0) {
 
             cout  << endl << "Has decidido terminar tu turno con una suma de: " << sumaSeleccionada << " / Objetivo: " << sumaObjetivo << endl ;
 
-            break ; // Salir del bucle de selección
+            break ;
         }
 
-        // Valido que el dado elegido esté en el stock del jugador (en la copia del array)
+        int pos = posicionNumeroEnVector(tempStock, tempCant, dadoElegido) ;
 
-        int pos = posicionNumeroEnVector(tempStock, tempCant, dadoElegido) ; // fn en funcionesArray.cpp
+        if (pos != -1) {
 
-        if (pos != -1) { // lo que retorna posicionNumeroEnVector
-
-            if (dadosElegidosCantidad < stockMaximo) { // Asegurarse de no desbordar el array de seleccionados
+            if (dadosElegidosCantidad < stockMaximo) {
 
                 dadosElegidosValores[dadosElegidosCantidad] = dadoElegido ;
 
                 sumaSeleccionada += dadoElegido ;
 
-                _eliminarPrimerOcurrencia(tempStock, tempCant, dadoElegido) ; // Eliminar de la copia temporal // FN en funcionesdeArrays.cpp
+                _eliminarPrimerOcurrencia(tempStock, tempCant, dadoElegido) ;
 
                 dadosElegidosCantidad++ ;
 
                 cout << "Dado " << dadoElegido << " agregado. Suma actual: " << sumaSeleccionada << endl ;
-
-                // --- CONDICIONES DE CORTE AUTOMÁTICO Y DECLARACIÓN DE ÉXITO/FRACASO ---
-                // Si la suma seleccionada es igual al objetivo, corte y éxito
 
                 if (sumaSeleccionada == sumaObjetivo) {
 
@@ -152,37 +133,32 @@ bool procesarTurnoJugador(int stockActual[], int &cantActual, int stockOponente[
 
                     cout << endl << "Alcanzaste el numero objetivo (" << sumaObjetivo << ") Tirada exitosa!" << endl ;
 
-                    break ; // Salir del bucle de selección inmediatamente
+                    break ;
                 }
-
-                // Si la suma seleccionada supera el objetivo, corte y fracaso
 
                 else if (sumaSeleccionada > sumaObjetivo) {
 
-                    tiradaExitosa = false ; // Ya sería false, pero explícito
+                    tiradaExitosa = false ;
 
                     cout << endl << "Te pasaste del numero objetivo (" << sumaObjetivo << ") Tirada fallida!" << endl ;
 
-                    break ; // Salir del bucle de selección inmediatamente
+                    break ;
                 }
 
-                // Si ninguna condición de corte se cumple, el bucle continuará pidiendo más dados
             } else {
 
                 cout << endl << "Has seleccionado la cantidad maxima de dados. Finalizando seleccion." << endl ;
 
-                break ; // Salir del bucle de selección
+                break ;
             }
 
         } else {
 
             cout << endl << "No tenes el dado " << dadoElegido << " en tu stock o ya lo seleccionaste. Intenta de nuevo." << endl ;
         }
-            cout << endl ; // Salto de línea para mejor legibilidad antes del próximo prompt si el bucle continúa
+            cout << endl ;
 
     }
-
-    // --- FIN DEL BUCLE DE SELECCIÓN DE DADOS ---
 
     system("pause") ;
     system("cls") ;
@@ -191,13 +167,7 @@ bool procesarTurnoJugador(int stockActual[], int &cantActual, int stockOponente[
     cout << "Suma final de la seleccion: " << sumaSeleccionada << endl ;
     cout << "Numero objetivo: " << sumaObjetivo << endl << endl ;
 
-
-    // La lógica de éxito/fracaso y penalización/recompensa ahora se basa en 'tiradaExitosa'
-    // y se ejecuta UNA SOLA VEZ después de que el bucle de selección termina.
-
-    if (tiradaExitosa) { // Esta bandera ahora viene directamente del bucle de seleccion
-
-        // Puntuacion ---------------------------------------------------
+    if (tiradaExitosa) {
 
         int puntosRondaActual = sumaSeleccionada * dadosElegidosCantidad ;
 
@@ -205,13 +175,11 @@ bool procesarTurnoJugador(int stockActual[], int &cantActual, int stockOponente[
 
         cout << endl << nombreJugadorActual << " suma " << puntosRondaActual << " puntos en esta ronda. Puntos totales de "<< nombreJugadorActual <<": " << puntosJugador << endl ;
 
-        // Transferencia de dados
-
         for (int i = 0 ; i < dadosElegidosCantidad ; i++) {
 
             int dadoAEnviar = dadosElegidosValores[i] ;
 
-            _eliminarPrimerOcurrencia(stockActual, cantActual, dadoAEnviar) ; // Elimina del stock real
+            _eliminarPrimerOcurrencia(stockActual, cantActual, dadoAEnviar) ;
 
             if (cantOponente < stockMaximo) {
 
@@ -225,15 +193,14 @@ bool procesarTurnoJugador(int stockActual[], int &cantActual, int stockOponente[
 
         cout << "Se transfirieron " << dadosElegidosCantidad << " dados de " << nombreJugadorActual << " a " << nombreOponente << "." << endl ;
 
-        // Condicion de victoria automatica por quedarse sin dados
 
         if (cantActual <= 0) {
 
-            puntosJugador += 10000 ; // Bono por victoria automática
+            puntosJugador += 10000 ;
 
             cout << endl << nombreJugadorActual << " se ha quedado sin dados y ha ganado la partida automaticamente!" << endl << endl ;
 
-            return false ; // fin del juego
+            return false ;
         }
 
     } else { // Si no fue tiradaExitosa (porque se pasó o terminó manualmente sin alcanzar)
@@ -283,5 +250,5 @@ bool procesarTurnoJugador(int stockActual[], int &cantActual, int stockOponente[
     system("pause") ;
     system("cls") ;
 
-    return true ; // Juego continua
+    return true ;
 }

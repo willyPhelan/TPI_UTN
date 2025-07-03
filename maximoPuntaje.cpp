@@ -17,17 +17,13 @@ if(puntosJ1 > puntosJ2){
 
 void encontrarMaximoPuntaje(int &maximoPuntaje, int &mayorPuntaje, string &nombreMayorPuntaje, string &mejorMayor){
 
-    // Primero, actualiza el maximo puntaje historico si el puntaje de la ultima partida es mayor
-
     if(mayorPuntaje > maximoPuntaje){
 
         maximoPuntaje = mayorPuntaje ;
         mejorMayor = nombreMayorPuntaje ;
     }
 
-    // MODIFICADO: Muestra el mensaje condicionalmente
-
-    if(maximoPuntaje > 0){ // Asumiendo que los puntajes siempre son positivos
+    if(maximoPuntaje > 0){
 
         cout << "El puntaje maximo registrado es " << maximoPuntaje << " del jugador " << mejorMayor << endl << endl ;
 

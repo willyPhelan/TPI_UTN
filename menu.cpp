@@ -66,7 +66,7 @@ void ejecutarOpcion (int opcion, int &maximoPuntaje, int &mayorPuntaje, string &
 
         system("cls") ;
 
-        mostrarCreditos() ; // FN en menu.cpp
+        mostrarCreditos() ;
 
     break ;
 
@@ -80,9 +80,6 @@ void ejecutarOpcion (int opcion, int &maximoPuntaje, int &mayorPuntaje, string &
 
     }
 }
-
-
-/// OPCION 3 - CREDITOS
 
 void mostrarCreditos(){
 

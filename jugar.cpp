@@ -9,34 +9,27 @@ int jugar (int &maximoPuntaje, int &mayorPuntaje, string &nombreGanadorUltimaPar
 
     string jugador1, jugador2, primero_en_jugar, jugadorActual, oponente ;
 
-    int suma_objetivo = 0 ; // Se inicializa a 0, su valor cambia en el bucle
+    int suma_objetivo = 0 ;
 
     int puntosJ1=0, puntosJ2= 0 ;
 
-    const int stock_maximo = 12 ; // Maximo de dados por jugador (todos los dados del juego)
+    const int stock_maximo = 12 ;
 
     int stockJ1[stock_maximo] ;
     int stockJ2[stock_maximo] ;
 
-    int cantDadosJ1 = 6 ; // Cantidad inicial de dados para el Jugador 1
-    int cantDadosJ2 = 6 ; // Cantidad inicial de dados para el Jugador 2
-
-
-    // === INICIALIZACION DE DADOS AL INICIO DEL JUEGO ===
-    // Rellenar los stocks iniciales de dados (6 para cada jugador)
-
+    int cantDadosJ1 = 6 ;
+    int cantDadosJ2 = 6 ;
 
     for (int i = 0; i < cantDadosJ1; ++i) {
-        stockJ1[i] = dado6caras() ; // Usa la función que devuelve un int
+        stockJ1[i] = dado6caras() ;
     }
 
     for (int i = 0; i < cantDadosJ2; ++i) {
-        stockJ2[i] = dado6caras() ; // Usa la función que devuelve un int
+        stockJ2[i] = dado6caras() ;
     }
 
-
     cout << "--- A jugar! ---------" << endl << endl ;
-
 
     cout << "Ingrese el nombre del Jugador 1: " ;
     cin >> jugador1 ;
@@ -46,28 +39,17 @@ int jugar (int &maximoPuntaje, int &mayorPuntaje, string &nombreGanadorUltimaPar
 
     cout << endl ;
 
-    // Determino quien va primero
-
-    primero_en_jugar = determinarPrimerJugador(jugador1, jugador2) ; // fn en tirada.cpp
-
-
-    // =======================================================================
-    // === BUCLE PRINCIPAL DEL JUEGO: RONDA POR RONDA ===
-    // =======================================================================
+    primero_en_jugar = determinarPrimerJugador(jugador1, jugador2) ;
 
     int ronda = 1 ;
 
-    bool juegoContinua = true ; // bandera para controlar el fin del juego por victoria automática
+    bool juegoContinua = true ;
 
     while (ronda <= 3 && juegoContinua) {
 
-        // Mostrar estado actual de los jugadores al inicio de la ronda
-
-       mostrarEstadoJuego(ronda, jugador1, puntosJ1, cantDadosJ1, jugador2, puntosJ2, cantDadosJ2); // FN en  mostrarEstadoJuego.cpp
+       mostrarEstadoJuego(ronda, jugador1, puntosJ1, cantDadosJ1, jugador2, puntosJ2, cantDadosJ2);
 
        cout << endl ;
-
-        // TURNO DEL JUGADOR QUE EMPIEZA LA RONDA
 
         if (primero_en_jugar == jugador1) {
 
@@ -75,7 +57,7 @@ int jugar (int &maximoPuntaje, int &mayorPuntaje, string &nombreGanadorUltimaPar
 
             oponente = jugador2 ;
 
-            suma_objetivo = tirarDadosObjetivo(jugadorActual) ; // definida en dado12caras.cpp
+            suma_objetivo = tirarDadosObjetivo(jugadorActual) ;
 
             cout << endl << jugadorActual << ", tu numero objetivo es: " << suma_objetivo << endl ;
 
@@ -90,28 +72,24 @@ int jugar (int &maximoPuntaje, int &mayorPuntaje, string &nombreGanadorUltimaPar
 
             cout << endl << "Salieron los dados: " ;
 
-            tirarDados6Caras(stockJ1, cantDadosJ1) ; // J1 tira sus dados Funcion definda en dado6caras
+            tirarDados6Caras(stockJ1, cantDadosJ1) ;
 
-            juegoContinua = procesarTurnoJugador(stockJ1, cantDadosJ1, stockJ2, cantDadosJ2, suma_objetivo, puntosJ1, stock_maximo, jugador1, jugador2) ; // Fn definida en tirada.cpp
+            juegoContinua = procesarTurnoJugador(stockJ1, cantDadosJ1, stockJ2, cantDadosJ2, suma_objetivo, puntosJ1, stock_maximo, jugador1, jugador2) ;
 
-            // Mostrar estado de los jugadores después del turno del primer jugador
+            mostrarEstadoJuego(ronda, jugador1, puntosJ1, cantDadosJ1, jugador2, puntosJ2, cantDadosJ2) ;
 
-            mostrarEstadoJuego(ronda, jugador1, puntosJ1, cantDadosJ1, jugador2, puntosJ2, cantDadosJ2); // FN en  mostrarEstadoJuego.cpp
+            system("pause") ;
+            system("cls") ;
 
-            system("pause") ; // Pausa para que el usuario vea el estado actualizado
-            system("cls") ; // Limpia la pantalla para el siguiente turno/ronda
+            if (!juegoContinua) break ;
 
-            if (!juegoContinua) break ; // Si hay victoria automática, salir del bucle de rondas
-
-            // TURNO DEL SEGUNDO JUGADOR EN LA MISMA RONDA
-
-            jugadorActual = jugador2 ; // Ahora el jugador 2 es el actual
+            jugadorActual = jugador2 ;
             oponente = jugador1 ;
 
             cout << "=== RONDA " << ronda << " ===" << endl ;
             cout << "Turno de " << jugadorActual << " ---" << endl ;
 
-            suma_objetivo = tirarDadosObjetivo(jugadorActual) ; // El segundo jugador también tira los dados objetivo // FN definida en dados12caras.cpp
+            suma_objetivo = tirarDadosObjetivo(jugadorActual) ;
 
             cout << endl << jugadorActual << ", tu numero objetivo es: " << suma_objetivo << endl ;
             cout << endl << "Hora de alcanzarlo! " << endl << endl ;
@@ -119,29 +97,27 @@ int jugar (int &maximoPuntaje, int &mayorPuntaje, string &nombreGanadorUltimaPar
             system("pause") ;
             system("cls") ;
 
-            mostrarInfoTurno(ronda, jugadorActual, suma_objetivo) ; // FN en  mostrarEstadoJuego.cpp
+            mostrarInfoTurno(ronda, jugadorActual, suma_objetivo) ;
 
             system("pause") ;
 
             cout << endl << "Salieron los dados: " ;
-            tirarDados6Caras(stockJ2, cantDadosJ2) ; // J2 tira sus dados // FN definida en dado6caras.cpp
+            tirarDados6Caras(stockJ2, cantDadosJ2) ;
 
-            juegoContinua = procesarTurnoJugador(stockJ2, cantDadosJ2, stockJ1, cantDadosJ1, suma_objetivo, puntosJ2, stock_maximo, jugador2, jugador1) ; // FN en tirada.cpp
+            juegoContinua = procesarTurnoJugador(stockJ2, cantDadosJ2, stockJ1, cantDadosJ1, suma_objetivo, puntosJ2, stock_maximo, jugador2, jugador1) ;
 
-            // Mostrar estado de los jugadores después del turno del segundo jugador
+            mostrarEstadoJuego(ronda, jugador1, puntosJ1, cantDadosJ1, jugador2, puntosJ2, cantDadosJ2) ;
 
-            mostrarEstadoJuego(ronda, jugador1, puntosJ1, cantDadosJ1, jugador2, puntosJ2, cantDadosJ2) ; // FN en  mostrarEstadoJuego.cpp
-
-            system("pause") ; // Pausa para que el usuario vea el estado actualizado
-            system("cls") ; // Limpia la pantalla para el siguiente turno/ronda
+            system("pause") ;
+            system("cls") ;
 
 
-        } else { // Si primero_en_jugar == jugador2
+        } else {
 
             jugadorActual = jugador2 ;
             oponente = jugador1 ;
 
-            suma_objetivo = tirarDadosObjetivo(jugadorActual) ; // FN en dado12caras
+            suma_objetivo = tirarDadosObjetivo(jugadorActual) ;
 
             cout << endl << jugadorActual << ", tu numero objetivo es: " << suma_objetivo << endl ;
             cout << endl << "Hora de alcanzarlo! " << endl << endl ;
@@ -149,35 +125,31 @@ int jugar (int &maximoPuntaje, int &mayorPuntaje, string &nombreGanadorUltimaPar
             system("pause") ;
             system("cls") ;
 
-            mostrarInfoTurno(ronda, jugadorActual, suma_objetivo) ; // FN en  mostrarEstadoJuego.cpp
+            mostrarInfoTurno(ronda, jugadorActual, suma_objetivo) ;
 
             system("pause") ;
 
             cout << endl << "Salieron los dados: " ;
 
-            tirarDados6Caras(stockJ2, cantDadosJ2) ; // J2 tira sus dados // fn en dado6Caras.cpp
+            tirarDados6Caras(stockJ2, cantDadosJ2) ;
 
-            juegoContinua = procesarTurnoJugador(stockJ2, cantDadosJ2, stockJ1, cantDadosJ1, suma_objetivo, puntosJ2, stock_maximo, jugador2, jugador1) ; // fn definida en tirada.cpp
-
-            // Mostrar estado de los jugadores después del turno del primer jugador
+            juegoContinua = procesarTurnoJugador(stockJ2, cantDadosJ2, stockJ1, cantDadosJ1, suma_objetivo, puntosJ2, stock_maximo, jugador2, jugador1) ;
 
             mostrarEstadoJuego(ronda, jugador1, puntosJ1, cantDadosJ1, jugador2, puntosJ2, cantDadosJ2) ; // FN en  mostrarEstadoJuego.cpp
 
-            system("pause") ; // Pausa para que el usuario vea el estado actualizado
-            system("cls") ; // Limpia la pantalla para el siguiente turno/ronda
+            system("pause") ;
+            system("cls") ;
 
 
-            if (!juegoContinua) break ; // Si hay victoria automática, salir del bucle de rondas
+            if (!juegoContinua) break ;
 
-            // TURNO DEL SEGUNDO JUGADOR EN LA MISMA RONDA
-
-            jugadorActual = jugador1 ; // Ahora el jugador 1 es el actual
+            jugadorActual = jugador1 ;
             oponente = jugador2 ;
 
             cout << "=== RONDA " << ronda << " ===" << endl ;
             cout << "Turno de " << jugadorActual << " ---" << endl ;
 
-            suma_objetivo = tirarDadosObjetivo(jugadorActual) ; // El segundo jugador también tira los dados objetivo // FN en dado12Caras
+            suma_objetivo = tirarDadosObjetivo(jugadorActual) ;
 
             cout << endl << jugadorActual << ", tu numero objetivo es: " << suma_objetivo << endl ;
             cout << endl << "Hora de alcanzarlo! " << endl << endl ;
@@ -185,57 +157,48 @@ int jugar (int &maximoPuntaje, int &mayorPuntaje, string &nombreGanadorUltimaPar
             system("pause") ;
             system("cls") ;
 
-            mostrarInfoTurno(ronda, jugadorActual, suma_objetivo) ; // FN en  mostrarEstadoJuego.cpp
+            mostrarInfoTurno(ronda, jugadorActual, suma_objetivo) ;
 
             system("pause") ;
 
             cout << endl << "Salieron los dados: " ;
-            tirarDados6Caras(stockJ1, cantDadosJ1) ; // J1 tira sus dados - FN definida en dado6caras.cpp
-            juegoContinua = procesarTurnoJugador(stockJ1, cantDadosJ1, stockJ2, cantDadosJ2, suma_objetivo, puntosJ1, stock_maximo, jugador1, jugador2) ; // FN defindia en tirada.cpp
-
-            // Mostrar estado de los jugadores después del turno del segundo jugado
-
+            tirarDados6Caras(stockJ1, cantDadosJ1) ;
+            juegoContinua = procesarTurnoJugador(stockJ1, cantDadosJ1, stockJ2, cantDadosJ2, suma_objetivo, puntosJ1, stock_maximo, jugador1, jugador2) ;
 
         }
 
-        if (!juegoContinua) break ; // Si el segundo jugador obtuvo una victoria automática, sale del bucle de rondas
+        if (!juegoContinua) break ;
 
-        // FIN DE RONDA: Lógica para la próxima ronda y condiciones de victoria
-        // La victoria automática por 0 dados tiene prioridad.
 
         if (cantDadosJ1 <= 0) {
 
             cout << jugador2 << " ha ganado la partida. " << jugador1 << " se quedo sin dados." << endl ;
 
-            juegoContinua = false ; // Fin del juego
+            juegoContinua = false ;
         }
 
         if (cantDadosJ2 <= 0) {
 
             cout << jugador1 << " ha ganado la partida. " << jugador2 << " se quedo sin dados." << endl ;
 
-            juegoContinua = false ; // Fin del juego
+            juegoContinua = false ;
         }
 
-        // Si no hay condicion de victoria y no se completaron las 3 rondas, el juego sigue
+
 
         if (ronda < 3 && juegoContinua) {
 
             cout << endl << "Presiona cualquier tecla para comenzar la Ronda " << ronda + 1 << "..." << endl ;
 
             system("pause") ;
-            system("cls") ; // Limpia la pantalla para la siguiente ronda
+            system("cls") ;
         }
 
-        ronda++ ; // Incrementar la ronda SÓLO después de que ambos jugadores hayan jugado
+        ronda++ ;
 
     }
 
-    // FIN BUCLE PRINCIPAL DEL JUEGO
-
-    // Logica final del juego, determinar ganador por puntos si las 3 rondas terminan
-
-    if (ronda > 3 || !juegoContinua) { // Si el bucle terminó porque se completaron las 3 rondas o hubo victoria automática
+    if (ronda > 3 || !juegoContinua) {
 
         cout << "La partida ha terminado!" << endl << endl ;
 
@@ -255,10 +218,10 @@ int jugar (int &maximoPuntaje, int &mayorPuntaje, string &nombreGanadorUltimaPar
             cout << endl << "La partida ha terminado en empate!" << endl << endl ;
         }
 
-        mejorJugador(puntosJ1, puntosJ2, jugador1, jugador2, nombreGanadorUltimaPartida, mayorPuntaje); // FN en maximoPuntaje.cpp
+        mejorJugador(puntosJ1, puntosJ2, jugador1, jugador2, nombreGanadorUltimaPartida, mayorPuntaje);
     }
 
-    return 0 ; // juego termina
+    return 0 ;
 }
 
 
