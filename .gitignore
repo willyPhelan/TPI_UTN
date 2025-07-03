@@ -1,0 +1,33 @@
+# Archivos generados por Code::Blocks
+*.depend
+*.layout
+*.cbps
+*.workspace
+
+# Archivos de compilación
+*.o
+*.obj
+*.exe
+*.dll
+*.pdb
+*.ilk
+*.manifest
+
+# Carpetas comunes de binarios
+bin/
+obj/
+build/
+
+# Archivos temporales y del sistema
+*.log
+*.tmp
+*.bak
+*.~*
+
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos de backup
+*~
