@@ -36,8 +36,6 @@ int posicionNumeroEnVector(int v[],int tam, int numero){
     return -1 ;
 }
 
-
-
 void copiarVector(int v[] , int v2[] , int tam){
 
     int i ;

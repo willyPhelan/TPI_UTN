@@ -4,7 +4,7 @@
 
 using namespace std ;
 
-    int volver_atras(int opcion,int &maximoPuntaje,int &mayorPuntaje, string &mayorPuntajeJ1, string &mayorPuntajeJ2){
+    int volver_atras(){
 
     int volver=-99999 ;
 

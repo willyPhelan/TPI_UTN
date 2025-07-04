@@ -7,7 +7,7 @@ int dado6caras() ;// fn en dado6caras.cpp
 
 int dado12caras() ; // fn en  dado12caras.cpp
 
-int volver_atras(int opcion, int &maximoPuntaje, int &mayorPuntaje, string &nombreGanadorUltimaPartida, string &nombreGanadorHistorico) ;// fn en volverAtras.cpp
+int volver_atras() ;// fn en volverAtras.cpp
 
 int jugar(int &maximoPuntaje, int &mayorPuntaje, string &nombreGanadorUltimaPartida, string &nombreGanadorHistorico);// fn en jugar.cpp
 

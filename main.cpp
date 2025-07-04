@@ -35,7 +35,7 @@ int main() {
 
           ejecutarOpcion(opcion, maximoPuntaje, mayorPuntaje, nombreGanadorUltimaPartida, nombreGanadorHistorico) ;
 
-          int volverMenu = volver_atras(opcion, maximoPuntaje, mayorPuntaje, nombreGanadorUltimaPartida, nombreGanadorHistorico) ;
+          int volverMenu = volver_atras() ;
 
         if (volverMenu == 0) {
 
