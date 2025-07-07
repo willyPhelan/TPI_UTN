@@ -1,72 +1,108 @@
 #include "funciones.h"
 #include <iostream>
+#include "rlutil.h"
+
+using namespace std ;
+
+#include "funciones.h"
+#include <iostream>
+// Ya no es necesario #include "rlutil.h" si no se usan funciones de rlutil en este archivo.
 
 using namespace std ;
 
 string determinarPrimerJugador(string jugador1, string jugador2) {
 
     int dado1, dado2 ;
-
     string primero_en_jugar ;
 
-    cout << jugador1 << ", tira tu dado para ver quien comienza..." << endl ;
+    system("cls"); // Limpia la pantalla
+
+    rlutil::setBackgroundColor(rlutil::BLUE);
+
+    cout << jugador1 << ", tira tu dado para ver quien comienza..." << endl << endl ;
+
+    rlutil::setBackgroundColor(rlutil::BLACK) ;
 
     system("pause") ;
 
     dado1 = dado6caras() ;
 
-    cout << endl << "Salio el dado numero: " << dado1 << endl << endl ;
+    cout << endl << jugador1 << ", te salio el numero: " << endl;
 
-    cout << jugador2 << ", tira tu dado para ver quien comienza..." << endl ;
+    dibujarDado(dado1, 10, 6);
+
+    cout << endl << endl ; // Añade saltos de línea para espacio
+
+    system("pause") ;
+
+    system("cls") ;
+
+    rlutil::setBackgroundColor(rlutil::BLUE);
+
+    cout << jugador2 << ", tira tu dado para ver quien comienza..." << endl << endl ;
+
+    rlutil::setBackgroundColor(rlutil::BLACK) ;
 
     system("pause") ;
 
     dado2 = dado6caras() ;
 
-    cout << endl << "Salio el dado numero: " << dado2 << endl << endl ;
+    cout << endl << jugador2 << ", te salio el numero: " << endl << endl ;
+
+    dibujarDado(dado2, 10, 6) ;
+
+    cout << endl << endl ;
+
+    system("pause") ;
+
 
     while (dado1 == dado2) {
 
-        cout << "Empate! Deben repetir la tirada inicial." << endl ;
+        cout << endl << "Empate! Deben repetir la tirada inicial." << endl << endl ;
 
+        system("pause") ;
+
+        // Primer jugador repite tirada
+        system("cls"); // Limpia para el mensaje de repetición del Jugador 1
         cout << jugador1 << ", te toca tirar de lanzar de nuevo." << endl ;
 
         system("pause") ;
 
         dado1 = dado6caras() ;
+        system("cls"); // Limpia antes de mostrar nuevo dado
+        cout << jugador1 << " te salio el numero: " << endl;
+        dibujarDado(dado1, 10, 6);
+        cout << endl << endl ;
 
-        cout << jugador1 << " te salio el numero: " << dado1 << endl << endl ;
-
+        // Segundo jugador repite tirada
         cout << jugador2 << ", ahora te toca a vos tirar de lanzar de nuevo." << endl ;
+
+        dibujarDado(dado1, 10, 6);
 
         system("pause") ;
 
         dado2 = dado6caras() ;
-
-        cout << jugador2 << " te salio el numero: " << dado2 << endl << endl ;
+        system("cls"); // Limpia antes de mostrar nuevo dado
+        cout << jugador2 << " te salio el numero: " << endl;
+        dibujarDado(dado2, 10, 6);
+        cout << endl << endl ;
     }
 
+    system("cls"); // Limpia la pantalla para mostrar el resultado final
     cout << "----------------------------" << endl ;
 
     if (dado1 > dado2) {
-
         primero_en_jugar = jugador1 ;
-
-        cout << jugador1 << " sacaste el dado mas alto, vas primero!" << endl << endl ;
-
+        cout << jugador1 << " sacaste el dado mas alto, empiezas tu!" << endl ;
     } else {
-
         primero_en_jugar = jugador2 ;
-
-        cout << jugador2 << ", sacaste el dado mas alto, vas primero!" << endl << endl ;
+        cout << jugador2 << " sacaste el dado mas alto, empiezas tu!" << endl ;
     }
-
-    system("pause") ;
-    system("cls") ;
-
+    cout << "----------------------------" << endl ;
+    system("pause"); // Pausa para que el usuario vea el resultado
+    system("cls"); // Limpia antes de salir de la función
     return primero_en_jugar ;
 }
-
 
 bool procesarTurnoJugador(int stockActual[], int &cantActual, int stockOponente[], int &cantOponente,
                           int sumaObjetivo, int &puntosJugador, int stockMaximo,
@@ -86,13 +122,15 @@ bool procesarTurnoJugador(int stockActual[], int &cantActual, int stockOponente[
 
     int tempCant = cantActual ;
 
-    cout << "Tus dados: " << endl ;
-
     mostrarDados(stockActual, cantActual) ;
 
     cout << endl ;
 
+    rlutil::setBackgroundColor(rlutil::BLUE) ;
+
     cout << endl << "Ingresa los valores de los dados que deseas usar para sumar al objetivo (0 para terminar):" << endl << endl ;
+
+    rlutil::setBackgroundColor(rlutil::BLACK) ;
 
     int dadoElegido ;
 
@@ -105,6 +143,8 @@ bool procesarTurnoJugador(int stockActual[], int &cantActual, int stockOponente[
         cin >> dadoElegido ;
 
         if (dadoElegido == 0) {
+
+            rlutil::setBackgroundColor(rlutil::CYAN) ;
 
             cout  << endl << "Has decidido terminar tu turno con una suma de: " << sumaSeleccionada << " / Objetivo: " << sumaObjetivo << endl ;
 
@@ -131,6 +171,8 @@ bool procesarTurnoJugador(int stockActual[], int &cantActual, int stockOponente[
 
                     tiradaExitosa = true ;
 
+                    rlutil::setBackgroundColor(rlutil::GREEN) ;
+
                     cout << endl << "Alcanzaste el numero objetivo (" << sumaObjetivo << ") Tirada exitosa!" << endl ;
 
                     break ;
@@ -140,12 +182,16 @@ bool procesarTurnoJugador(int stockActual[], int &cantActual, int stockOponente[
 
                     tiradaExitosa = false ;
 
+                    rlutil::setBackgroundColor(rlutil::RED) ;
+
                     cout << endl << "Te pasaste del numero objetivo (" << sumaObjetivo << ") Tirada fallida!" << endl ;
 
                     break ;
                 }
 
             } else {
+
+                rlutil::setBackgroundColor(rlutil::RED) ;
 
                 cout << endl << "Has seleccionado la cantidad maxima de dados. Finalizando seleccion." << endl ;
 
@@ -154,6 +200,8 @@ bool procesarTurnoJugador(int stockActual[], int &cantActual, int stockOponente[
 
         } else {
 
+            rlutil::setBackgroundColor(rlutil::RED) ;
+
             cout << endl << "No tenes el dado " << dadoElegido << " en tu stock o ya lo seleccionaste. Intenta de nuevo." << endl ;
         }
             cout << endl ;
@@ -161,6 +209,9 @@ bool procesarTurnoJugador(int stockActual[], int &cantActual, int stockOponente[
     }
 
     system("pause") ;
+
+    rlutil::setBackgroundColor(rlutil::BLACK) ;
+
     system("cls") ;
 
     cout << "--- FIN DE LA SELECCION DE DADOS ---" << endl ;
@@ -191,10 +242,16 @@ bool procesarTurnoJugador(int stockActual[], int &cantActual, int stockOponente[
             }
         }
 
+         rlutil::setBackgroundColor(rlutil::GREEN) ;
+
         cout << "Se transfirieron " << dadosElegidosCantidad << " dados de " << nombreJugadorActual << " a " << nombreOponente << "." << endl ;
 
 
+        rlutil::setBackgroundColor(rlutil::BLACK) ;
+
         if (cantActual <= 0) {
+
+            rlutil::setBackgroundColor(rlutil::GREEN);
 
             puntosJugador += 10000 ;
 
@@ -203,15 +260,15 @@ bool procesarTurnoJugador(int stockActual[], int &cantActual, int stockOponente[
             return false ;
         }
 
-    } else { // Si no fue tiradaExitosa (porque se pasó o terminó manualmente sin alcanzar)
-
-        // Verificamos si se pasó del objetivo o si simplemente terminó sin alcanzarlo
+    } else {
 
         if (sumaSeleccionada > sumaObjetivo) {
 
             cout << "LO SIENTO. Te pasaste del numero objetivo (" << sumaObjetivo << "). Tu suma fue " << sumaSeleccionada << "." << endl ;
 
         } else {
+
+            rlutil::setBackgroundColor(rlutil::RED) ;
 
              cout << "No lograste una tirada exitosa. La suma seleccionada fue " << sumaSeleccionada << " pero el objetivo era " << sumaObjetivo << "." << endl ;
         }
@@ -232,9 +289,12 @@ bool procesarTurnoJugador(int stockActual[], int &cantActual, int stockOponente[
 
                         cout << nombreOponente << " ha enviado un dado a " << nombreJugadorActual << " como penalidad." << endl ;
 
+                        rlutil::setBackgroundColor(rlutil::BLACK) ;
+
                     } else {
 
                         cout << "Advertencia: El stock de " << nombreJugadorActual << " esta lleno. El dado " << dadoATransferir << " de penalidad se pierde." << endl ;
+
                     }
                 }
             }

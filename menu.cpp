@@ -1,10 +1,14 @@
 #include<iostream>
 #include "funciones.h"
+#include "rlutil.h"
+
 
 using namespace std ;
 
 
 void mostrarCartelEnfrendados(){
+
+rlutil::setColor(rlutil::YELLOW) ;
 
 cout << "    _______   ____________  _______   ______  ____   ____  ____  _____" << endl ;
 cout << "   / ____/ | / / ____/ __ |/ ____/ | / / __ |/   |  / __ |/ __ |/ ___/" << endl ;
@@ -13,6 +17,8 @@ cout << " / /___/ /|  / __/ / __ _/ /___/ /|  / /_/ / ___ |/ /_/ / /_/ /__/ /" <
 cout << "/_____/_/ |_/_/   /_/ |_/_____/_/ |_/_____/_/  |_/_____/|____/____/" << endl << endl ;
 
 system("pause") ;
+
+rlutil::setColor(rlutil::WHITE) ;
 }
 
 int seleccionarOpcion(){

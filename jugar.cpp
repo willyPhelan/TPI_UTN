@@ -2,6 +2,7 @@
 #include <ctime>
 #include <string>
 #include "funciones.h"
+#include "rlutil.h"
 
 using namespace std ;
 
@@ -102,6 +103,7 @@ int jugar (int &maximoPuntaje, int &mayorPuntaje, string &nombreGanadorUltimaPar
             system("pause") ;
 
             cout << endl << "Salieron los dados: " ;
+
             tirarDados6Caras(stockJ2, cantDadosJ2) ;
 
             juegoContinua = procesarTurnoJugador(stockJ2, cantDadosJ2, stockJ1, cantDadosJ1, suma_objetivo, puntosJ2, stock_maximo, jugador2, jugador1) ;
@@ -162,6 +164,7 @@ int jugar (int &maximoPuntaje, int &mayorPuntaje, string &nombreGanadorUltimaPar
             system("pause") ;
 
             cout << endl << "Salieron los dados: " ;
+
             tirarDados6Caras(stockJ1, cantDadosJ1) ;
             juegoContinua = procesarTurnoJugador(stockJ1, cantDadosJ1, stockJ2, cantDadosJ2, suma_objetivo, puntosJ1, stock_maximo, jugador1, jugador2) ;
 
@@ -207,13 +210,19 @@ int jugar (int &maximoPuntaje, int &mayorPuntaje, string &nombreGanadorUltimaPar
 
         if (puntosJ1 > puntosJ2) {
 
+            rlutil::setBackgroundColor(rlutil::GREEN);
+
             cout << endl << jugador1 << " ha ganado la partida!" << endl ;
 
         } else if (puntosJ2 > puntosJ1) {
 
+            rlutil::setBackgroundColor(rlutil::GREEN);
+
             cout << endl << jugador2 << " ha ganado la partida!" << endl ;
 
         } else {
+
+            rlutil::setBackgroundColor(rlutil::YELLOW) ;
 
             cout << endl << "La partida ha terminado en empate!" << endl << endl ;
         }

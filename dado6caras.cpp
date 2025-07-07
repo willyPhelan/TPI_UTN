@@ -2,6 +2,7 @@
 #include "funciones.h"
 #include <iostream>
 
+
 using namespace std ;
 
 int dado6caras(){

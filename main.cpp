@@ -2,6 +2,7 @@
 #include <string>
 #include <ctime>
 #include "funciones.h"
+#include "rlutil.h"
 
 using namespace std ;
 
@@ -17,6 +18,8 @@ int main() {
     string nombreGanadorHistorico = "" ;
 
     mostrarCartelEnfrendados() ;
+
+    rlutil::resetColor();
 
     do {
 

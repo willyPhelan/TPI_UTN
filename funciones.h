@@ -56,3 +56,9 @@ void mostrarCreditos() ; // fn en menu.cpp
 void mostrarEstadoJuego(int ronda, string &jugador1, int puntosJ1, int cantDadosJ1, string &jugador2, int puntosJ2, int cantDadosJ2) ; // FN en  mostrarEstadoJuego.cpp
 
 void mostrarInfoTurno(int ronda, string &jugadorActual, int sumaObjetivo) ; // FN en  mostrarEstadoJuego.cpp
+
+// Declaraciones de las nuevas funciones de dibujo de dados
+
+void dibujarDado(int numero, int posc, int posf);
+
+void mostrarDados(const int dados[], int cantidadDados) ;

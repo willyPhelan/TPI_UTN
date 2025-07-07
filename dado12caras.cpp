@@ -1,6 +1,7 @@
 #include <iostream>
 #include <ctime>
 #include "funciones.h"
+#include "rlutil.h"
 
 using namespace std ;
 
@@ -10,14 +11,18 @@ int dado12caras(){
 
     random = rand() % 12 + 1 ;
 
-    return random ; }
-
+    return random ;
+}
 
 int tirarDadosObjetivo(string jugadorActual) {
 
     int primer_tiro, segundo_tiro ;
 
+    rlutil::setBackgroundColor(rlutil::RED) ;
+
     cout << jugadorActual << ", momento de tirar los dados objetivo!" << endl << endl ;
+
+    rlutil::setBackgroundColor(rlutil::BLACK) ;
 
     system("pause") ;
 
