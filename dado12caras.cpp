@@ -20,7 +20,7 @@ int tirarDadosObjetivo(string jugadorActual) {
 
     rlutil::setBackgroundColor(rlutil::RED) ;
 
-    cout << jugadorActual << ", momento de tirar los dados objetivo!" << endl << endl ;
+    cout << jugadorActual << ", momento de establecer tu objetivo!" << endl << endl ;
 
     rlutil::setBackgroundColor(rlutil::BLACK) ;
 
@@ -29,7 +29,7 @@ int tirarDadosObjetivo(string jugadorActual) {
     primer_tiro = dado12caras() ;
     segundo_tiro = dado12caras() ;
 
-    cout << endl << "Salieron los numeros: " << endl << primer_tiro << " " << segundo_tiro << endl << endl ;
+    cout << endl << "Salieron los numeros: " << endl << endl << primer_tiro << " " << segundo_tiro << endl << endl ;
 
     return primer_tiro + segundo_tiro ;
 }

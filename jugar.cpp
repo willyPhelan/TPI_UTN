@@ -210,21 +210,51 @@ int jugar (int &maximoPuntaje, int &mayorPuntaje, string &nombreGanadorUltimaPar
 
         if (puntosJ1 > puntosJ2) {
 
-            rlutil::setBackgroundColor(rlutil::GREEN);
+            rlutil::setBackgroundColor(rlutil::GREEN) ;
 
             cout << endl << jugador1 << " ha ganado la partida!" << endl ;
 
+            rlutil::setBackgroundColor(rlutil::BLACK) ;
+
+               std::cout << "      ___________        \n" ;
+               std::cout << "     '._==_==_=_.'       \n" ;
+               std::cout << "     .-\\\\:   /-.      \n" ;
+               std::cout << "    | (|:.     |) |      \n" ;
+               std::cout << "     '-|:.     |-'       \n" ;
+               std::cout << "       \\\\::. /        \n" ;
+               std::cout << "        '::. .'          \n" ;
+               std::cout << "          ) (            \n" ;
+               std::cout << "        _.' '._          \n" ;
+               std::cout << "    `\"\"\"\"\"\"\"`         \n" ;
+
+
+
         } else if (puntosJ2 > puntosJ1) {
 
-            rlutil::setBackgroundColor(rlutil::GREEN);
+            rlutil::setBackgroundColor(rlutil::GREEN) ;
 
             cout << endl << jugador2 << " ha ganado la partida!" << endl ;
+
+             rlutil::setBackgroundColor(rlutil::BLACK) ;
+
+               std::cout << "      ___________        \n" ;
+               std::cout << "     '._==_==_=_.'       \n" ;
+               std::cout << "     .-\\\\::////-.      \n" ;
+               std::cout << "    | (|:.   .:|) |      \n" ;
+               std::cout << "     '-|:.     |-'       \n" ;
+               std::cout << "       \\\\::. /        \n" ;
+               std::cout << "        '::. .'          \n" ;
+               std::cout << "          ) (            \n" ;
+               std::cout << "        _.' '._          \n" ;
+               std::cout << "    `\"\"\"\"\"\"\"`         \n" ;
 
         } else {
 
             rlutil::setBackgroundColor(rlutil::YELLOW) ;
 
             cout << endl << "La partida ha terminado en empate!" << endl << endl ;
+
+            rlutil::setBackgroundColor(rlutil::BLACK) ;
         }
 
         mejorJugador(puntosJ1, puntosJ2, jugador1, jugador2, nombreGanadorUltimaPartida, mayorPuntaje);

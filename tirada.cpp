@@ -4,20 +4,14 @@
 
 using namespace std ;
 
-#include "funciones.h"
-#include <iostream>
-// Ya no es necesario #include "rlutil.h" si no se usan funciones de rlutil en este archivo.
-
-using namespace std ;
-
 string determinarPrimerJugador(string jugador1, string jugador2) {
 
     int dado1, dado2 ;
     string primero_en_jugar ;
 
-    system("cls"); // Limpia la pantalla
+    system("cls") ;
 
-    rlutil::setBackgroundColor(rlutil::BLUE);
+    rlutil::setBackgroundColor(rlutil::BLUE) ;
 
     cout << jugador1 << ", tira tu dado para ver quien comienza..." << endl << endl ;
 
@@ -27,17 +21,17 @@ string determinarPrimerJugador(string jugador1, string jugador2) {
 
     dado1 = dado6caras() ;
 
-    cout << endl << jugador1 << ", te salio el numero: " << endl;
+    cout << endl << jugador1 << ", te salio el numero: " << endl ;
 
-    dibujarDado(dado1, 10, 6);
+    dibujarDado(dado1, 10, 6) ;
 
-    cout << endl << endl ; // Añade saltos de línea para espacio
+    cout << endl << endl ;
 
     system("pause") ;
 
     system("cls") ;
 
-    rlutil::setBackgroundColor(rlutil::BLUE);
+    rlutil::setBackgroundColor(rlutil::BLUE) ;
 
     cout << jugador2 << ", tira tu dado para ver quien comienza..." << endl << endl ;
 
@@ -58,49 +52,69 @@ string determinarPrimerJugador(string jugador1, string jugador2) {
 
     while (dado1 == dado2) {
 
+        rlutil::setBackgroundColor(rlutil::LIGHTBLUE) ;
+
+
         cout << endl << "Empate! Deben repetir la tirada inicial." << endl << endl ;
+
+        rlutil::setBackgroundColor(rlutil::BLACK) ;
 
         system("pause") ;
 
-        // Primer jugador repite tirada
-        system("cls"); // Limpia para el mensaje de repetición del Jugador 1
+        system("cls") ;
+
         cout << jugador1 << ", te toca tirar de lanzar de nuevo." << endl ;
 
         system("pause") ;
 
         dado1 = dado6caras() ;
-        system("cls"); // Limpia antes de mostrar nuevo dado
-        cout << jugador1 << " te salio el numero: " << endl;
-        dibujarDado(dado1, 10, 6);
+
+        system("cls") ;
+
+        cout << jugador1 << " te salio el numero: " << endl ;
+
+        dibujarDado(dado1, 10, 6) ;
+
         cout << endl << endl ;
 
-        // Segundo jugador repite tirada
         cout << jugador2 << ", ahora te toca a vos tirar de lanzar de nuevo." << endl ;
 
-        dibujarDado(dado1, 10, 6);
+        dibujarDado(dado1, 10, 6) ;
 
         system("pause") ;
 
         dado2 = dado6caras() ;
-        system("cls"); // Limpia antes de mostrar nuevo dado
-        cout << jugador2 << " te salio el numero: " << endl;
-        dibujarDado(dado2, 10, 6);
+
+        system("cls") ;
+
+        cout << jugador2 << " te salio el numero: " << endl ;
+
+        dibujarDado(dado2, 10, 6) ;
+
         cout << endl << endl ;
     }
 
-    system("cls"); // Limpia la pantalla para mostrar el resultado final
-    cout << "----------------------------" << endl ;
+    system("cls") ;
+
 
     if (dado1 > dado2) {
+
         primero_en_jugar = jugador1 ;
-        cout << jugador1 << " sacaste el dado mas alto, empiezas tu!" << endl ;
+
+        cout << jugador1 << " sacaste el dado mas alto, empezas vos!" << endl ;
+
     } else {
+
         primero_en_jugar = jugador2 ;
-        cout << jugador2 << " sacaste el dado mas alto, empiezas tu!" << endl ;
+
+        cout << jugador2 << " sacaste el dado mas alto, empezas vos!" << endl ;
     }
+
     cout << "----------------------------" << endl ;
-    system("pause"); // Pausa para que el usuario vea el resultado
-    system("cls"); // Limpia antes de salir de la función
+
+    system("pause") ;
+    system("cls") ;
+
     return primero_en_jugar ;
 }
 
@@ -273,11 +287,10 @@ bool procesarTurnoJugador(int stockActual[], int &cantActual, int stockOponente[
              cout << "No lograste una tirada exitosa. La suma seleccionada fue " << sumaSeleccionada << " pero el objetivo era " << sumaObjetivo << "." << endl ;
         }
 
-        // Penalidad (transferencia de dado del oponente)
 
-        if (cantOponente > 1) { // Oponente debe tener al menos 1 dado
+        if (cantOponente > 1) {
 
-            int dadoATransferir = obtenerDadoAleatorioDeStock(stockOponente, cantOponente) ; // Asumiendo que esta funcion existe
+            int dadoATransferir = obtenerDadoAleatorioDeStock(stockOponente, cantOponente) ;
 
             if (dadoATransferir != -1) {
 
@@ -286,6 +299,8 @@ bool procesarTurnoJugador(int stockActual[], int &cantActual, int stockOponente[
                     if (cantActual < stockMaximo) {
 
                         cantActual = agregarDadoAlArray(stockActual, cantActual, dadoATransferir) ;
+
+                        rlutil::setBackgroundColor(rlutil::RED) ;
 
                         cout << nombreOponente << " ha enviado un dado a " << nombreJugadorActual << " como penalidad." << endl ;
 
@@ -301,7 +316,11 @@ bool procesarTurnoJugador(int stockActual[], int &cantActual, int stockOponente[
 
         } else {
 
+            rlutil::setBackgroundColor(rlutil::BROWN) ;
+
             cout << "El oponente no tiene suficientes dados para penalizarte." << endl ;
+
+            rlutil::setBackgroundColor(rlutil::BLACK) ;
         }
     }
 
